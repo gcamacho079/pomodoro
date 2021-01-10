@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import Timer from './Timer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Pomodoro</h1>
+      <label id="break-label">Break Length</label>
+      <input type="number" id="break-length" value="5"/>
+      <button id="break-decrement">-</button>
+      <button id="break-increment">+</button>
+
+      <label id="session-label">Session Length</label>
+      <input type="number" id="session-length" value="25"/>
+      <button id="session-decrement">-</button>
+      <button id="session-increment">+</button>
+
+      <Timer />
     </div>
   );
 }
