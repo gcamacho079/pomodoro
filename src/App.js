@@ -1,15 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import Timer from './Timer';
-import BreakController from './BreakController';
-import SessionController from './SessionController';
+import TimerConfig from './TimerConfig';
 
 function App() {
   return (
     <div className="App">
       <h1>Pomodoro</h1>
-      <BreakController />
-      <SessionController />
+      <TimerConfig />
       <Timer />
     </div>
   );
