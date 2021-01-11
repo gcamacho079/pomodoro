@@ -7,6 +7,17 @@ class BreakController extends React.Component {
     this.state = { breakLength: 5 };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const value = parseInt(event.target.value, 10);
+
+    if (value <= 0) return;
+
+    this.setState(state => ({
+      breakLength: value
+    }));
   }
 
   handleClick(event) {
@@ -21,8 +32,8 @@ class BreakController extends React.Component {
   render() {
     return (
       <div>
-        <label id="break-label" for="break-length">Break Length</label>
-        <input type="number" id="break-length" value={this.state.breakLength} />
+        <label id="break-label" htmlFor="break-length">Break Length</label>
+        <input  onChange={this.handleChange} type="number" id="break-length" value={this.state.breakLength} />
         <button onClick={this.handleClick} data-action="decrement" id="break-decrement">-</button>
         <button onClick={this.handleClick} data-action="increment" id="break-increment">+</button>
       </div>
