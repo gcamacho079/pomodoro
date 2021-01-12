@@ -5,11 +5,7 @@ const getNewValue = (currentValue, action) => {
       newValue = currentValue + 1;
       break;
     case 'decrement':
-      if (currentValue > 1) {
-        newValue = currentValue - 1;
-      } else {
-        newValue = currentValue;
-      }
+      newValue = currentValue - 1;
       break;
     default:
       newValue = currentValue;
