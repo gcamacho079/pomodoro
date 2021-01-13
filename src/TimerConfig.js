@@ -53,9 +53,6 @@ class TimerConfig extends React.Component {
     if (newValue < inputMin || newValue > inputMax) return;
 
     this.props.onIntervalChange(stateProp, newValue);
-    // this.setState(state => ({
-    //   [stateProp]: newValue
-    // }));
   }
 
   render() {

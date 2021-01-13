@@ -10,6 +10,8 @@ class App extends React.Component {
     this.state = {
       breakLength: 5,
       sessionLength: 25,
+      remainingTime: 1500,
+      sessionActive: true
     }
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
@@ -26,7 +28,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Pomodoro</h1>
         <TimerConfig onIntervalChange={this.onIntervalChange} breakLength={this.state.breakLength} sessionLength={this.state.sessionLength}/>
-        <Timer />
+        <Timer sessionActive={this.state.sessionActive} remainingTime={this.state.remainingTime}/>
       </div>
     );
   }
