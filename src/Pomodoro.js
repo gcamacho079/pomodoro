@@ -1,18 +1,16 @@
-import logo from './logo.svg';
 import React from 'react';
-import './App.css';
 import Timer from './Timer';
 import TimerConfig from './TimerConfig';
 
-class App extends React.Component {
+class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeState: 'session',
       breakLength: 5,
       sessionLength: 25,
       remainingTime: 1500,
       timerIsActive: false,
-      activeState: 'session'
     }
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
@@ -28,11 +26,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Pomodoro</h1>
-        <TimerConfig onIntervalChange={this.onIntervalChange} breakLength={this.state.breakLength} sessionLength={this.state.sessionLength}/>
-        <Timer activeState={this.state.activeState} timerIsActive={this.state.timerIsActive} remainingTime={this.state.remainingTime}/>
+        <TimerConfig 
+          onIntervalChange={this.onIntervalChange} 
+          breakLength={this.state.breakLength} 
+          sessionLength={this.state.sessionLength}/>
+        <Timer 
+          activeState={this.state.activeState} 
+          timerIsActive={this.state.timerIsActive} 
+          remainingTime={this.state.remainingTime}/>
       </div>
     );
   }
 }
 
-export default App;
+export default Pomodoro;
