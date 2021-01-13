@@ -11,7 +11,8 @@ class App extends React.Component {
       breakLength: 5,
       sessionLength: 25,
       remainingTime: 1500,
-      sessionActive: true
+      timerIsActive: false,
+      activeState: 'session'
     }
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
@@ -28,7 +29,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Pomodoro</h1>
         <TimerConfig onIntervalChange={this.onIntervalChange} breakLength={this.state.breakLength} sessionLength={this.state.sessionLength}/>
-        <Timer sessionActive={this.state.sessionActive} remainingTime={this.state.remainingTime}/>
+        <Timer activeState={this.state.activeState} timerIsActive={this.state.timerIsActive} remainingTime={this.state.remainingTime}/>
       </div>
     );
   }
