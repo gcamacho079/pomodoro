@@ -7,9 +7,7 @@ const addLeadingZeroes = (value) => {
 
 const formatTime = (totalSeconds) => {
   const minutes = Math.floor(totalSeconds / 60);
-
-  // This doesn't make sense right now, just a placeholder
-  const seconds = totalSeconds % minutes;
+  const seconds = totalSeconds % 60;
 
   const minutesString = addLeadingZeroes(minutes);
   const secondsString = addLeadingZeroes(seconds);
@@ -24,7 +22,7 @@ const Timer = (props) => {
       <h2 id="timer-label">Session</h2>
       <span id="time-left">{formatTime(props.remainingTime)}</span>
       <button id="reset">Reset</button>
-      <button id="start_stop">Start/Stop</button>
+      <button onClick={props.handleStartStopClick} id="start_stop">Start</button>
     </div>
   )
 };

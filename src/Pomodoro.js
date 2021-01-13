@@ -14,12 +14,23 @@ class Pomodoro extends React.Component {
     }
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
+    this.handleStartStopClick = this.handleStartStopClick.bind(this);
   }
 
   onIntervalChange(property, value) {
     this.setState((state) => ({
       [property]: value,
     }));
+  }
+
+  handleStartStopClick(event) {
+    if (!this.state.timerIsActive) {
+      setInterval(() => {
+        this.setState(() => ({
+          remainingTime: this.state.remainingTime - 1,
+        }));
+      }, 1000);
+    }
   }
 
   render() {
@@ -33,7 +44,8 @@ class Pomodoro extends React.Component {
         <Timer 
           activeState={this.state.activeState} 
           timerIsActive={this.state.timerIsActive} 
-          remainingTime={this.state.remainingTime}/>
+          remainingTime={this.state.remainingTime}
+          handleStartStopClick={this.handleStartStopClick}/>
       </div>
     );
   }
