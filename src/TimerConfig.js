@@ -27,10 +27,10 @@ class TimerConfig extends React.Component {
   handleChange(event) {
     const { target } = event;
     const value = parseInt(target.value, 10);
-
-    if (typeof value !== 'number') return;
-
     const stateProp = getStateProperty(target.id);
+
+    if (Number.isNaN(value)) return this.props[stateProp];
+
     const inputMin = getInputMin(target);
     const inputMax = getInputMax(target);
 
