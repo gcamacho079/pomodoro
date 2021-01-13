@@ -19,10 +19,6 @@ const getInputMax = (input) => parseInt(input.getAttribute('max'), 10);
 class TimerConfig extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      breakLength: 5,
-      sessionLength: 25
-    };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,9 +37,7 @@ class TimerConfig extends React.Component {
     if (value < inputMin 
      || value > inputMax) return;
 
-    this.setState(state => ({
-      [stateProp]: value
-    }));
+    this.props.onIntervalChange(stateProp, value);
   }
 
   handleClick(event) {
@@ -52,15 +46,16 @@ class TimerConfig extends React.Component {
     const parentNode = target.parentNode;
     const targetInput = parentNode.querySelector('input');
     const stateProp = getStateProperty(target.id);
-    const newValue = getNewValue(this.state[stateProp], action);
+    const newValue = getNewValue(this.props[stateProp], action);
     const inputMin = getInputMin(targetInput);
     const inputMax = getInputMax(targetInput);
 
     if (newValue < inputMin || newValue > inputMax) return;
 
-    this.setState(state => ({
-      [stateProp]: newValue
-    }));
+    this.props.onIntervalChange(stateProp, newValue);
+    // this.setState(state => ({
+    //   [stateProp]: newValue
+    // }));
   }
 
   render() {
@@ -68,13 +63,13 @@ class TimerConfig extends React.Component {
       <div>
         <div>
           <label id="break-label" htmlFor="break-length">Break Length</label>
-          <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.state.breakLength} />
+          <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.props.breakLength} />
           <button onClick={this.handleClick} data-action="decrement" id="break-decrement">-</button>
           <button onClick={this.handleClick} data-action="increment" id="break-increment">+</button>
         </div>
         <div>
           <label id="session-label">Session Length</label>
-          <input onChange={this.handleChange} min="1" max="60" type="number" id="session-length" value={this.state.sessionLength}/>
+          <input onChange={this.handleChange} min="1" max="60" type="number" id="session-length" value={this.props.sessionLength}/>
           <button onClick={this.handleClick} data-action="decrement" id="session-decrement">-</button>
           <button onClick={this.handleClick} data-action="increment" id="session-increment">+</button>
         </div>
