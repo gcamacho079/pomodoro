@@ -2,6 +2,7 @@ import React from 'react';
 import Timer from './Timer';
 import TimerConfig from './TimerConfig';
 
+let interval;
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,7 @@ class Pomodoro extends React.Component {
       sessionLength: 25,
       remainingTime: 1500,
       timerIsActive: false,
+      timer: null,
     }
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
@@ -22,7 +24,29 @@ class Pomodoro extends React.Component {
       timerIsActive: false,
       remainingTime: this.state.sessionLength * 60,
       activeState: 'session',
-    }));
+    }), () => {
+      clearInterval(interval);
+    });
+  }
+
+  pauseTimer() {
+    this.setState(({
+      timerIsActive: false,
+    }), () => {
+      clearInterval(interval);
+    });
+  }
+
+  activateTimer() {
+    this.setState(({
+      timerIsActive: true,
+    }), () => {
+      interval = setInterval(() => {
+        this.setState(({
+          remainingTime: this.state.remainingTime - 1,
+        }));
+      }, 1000);
+    });
   }
 
   onIntervalChange(property, value) {
@@ -31,13 +55,11 @@ class Pomodoro extends React.Component {
     }), this.resetTimer);
   }
 
-  handleStartStopClick(event) {
+  handleStartStopClick() {
     if (!this.state.timerIsActive) {
-      setInterval(() => {
-        this.setState(() => ({
-          remainingTime: this.state.remainingTime - 1,
-        }));
-      }, 1000);
+      this.activateTimer();
+    } else {
+      this.pauseTimer();
     }
   }
 
