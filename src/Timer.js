@@ -1,3 +1,18 @@
+import styled from 'styled-components';
+
+const Button = styled.button`
+  margin: 10px;
+  background-color: transparent;
+  color: black;
+  border-color: black;
+  padding: 8px;
+`;
+
+const TimerCountdown = styled.div`
+  font-size: 48px;
+  text-align: center;
+`;
+
 const addLeadingZeroes = (value) => {
   let string = value + '';
   string = '00' + string;
@@ -20,11 +35,11 @@ const Timer = (props) => {
   return (
     <>
       <h2 id="timer-label">{props.activeSessionType === 'session' ? 'Session' : 'Break'}</h2>
-      <span id="time-left">{formatTime(props.remainingTime)}</span>
-      <button onClick={props.handleResetClick} id="reset">Reset</button>
-      <button onClick={props.handleStartStopClick} id="start_stop">
+      <TimerCountdown id="time-left">{formatTime(props.remainingTime)}</TimerCountdown>
+      <Button onClick={props.handleResetClick} id="reset">Reset</Button>
+      <Button onClick={props.handleStartStopClick} id="start_stop">
         {props.timerIsActive ? 'Stop' : 'Start'}
-      </button>
+      </Button>
     </>
   )
 };

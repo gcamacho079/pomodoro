@@ -1,5 +1,6 @@
 import React from 'react';
 import getNewValue from './utils/getNewValue';
+import styled from 'styled-components';
 
 const getStateProperty = (id) => {
   let property = '';

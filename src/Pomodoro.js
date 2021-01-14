@@ -2,6 +2,15 @@ import React from 'react';
 import Timer from './Timer';
 import TimerConfig from './TimerConfig';
 import soundUrl from './beep.wav';
+import styled from 'styled-components';
+
+const PomodoroWrapper = styled.div`
+  max-width: 600px;
+  background-color: lavender;
+  padding: 30px;
+  margin: 30px auto;
+`;
+
 
 let interval;
 class Pomodoro extends React.Component {
@@ -113,7 +122,7 @@ class Pomodoro extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <PomodoroWrapper>
         <h1>Pomodoro</h1>
         <TimerConfig 
           onIntervalChange={this.onIntervalChange} 
@@ -126,7 +135,7 @@ class Pomodoro extends React.Component {
           handleResetClick={this.handleResetClick}
           handleStartStopClick={this.handleStartStopClick}/>
         <audio id="beep" src={soundUrl}/>
-      </div>
+      </PomodoroWrapper>
     );
   }
 }
