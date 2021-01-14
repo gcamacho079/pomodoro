@@ -7,7 +7,7 @@ class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeState: 'session',
+      activeSessionType: 'session',
       breakLength: 5,
       sessionLength: 25,
       remainingTime: 1500,
@@ -25,7 +25,7 @@ class Pomodoro extends React.Component {
     this.setState(({
       timerIsActive: false,
       remainingTime: this.state.sessionLength * 60,
-      activeState: 'session',
+      activeSessionType: 'session',
     }), () => {
       clearInterval(interval);
     });
@@ -39,8 +39,8 @@ class Pomodoro extends React.Component {
     });
   }
 
-  getNewActiveState() {
-    switch(this.state.activeState) {
+  getNextSessionType() {
+    switch(this.state.activeSessionType) {
       case 'session':
         return 'break';
       case 'break':
@@ -56,12 +56,12 @@ class Pomodoro extends React.Component {
         remainingTime: this.state.remainingTime - 1,
       }));
     } else {
-      const newActiveState = this.getNewActiveState();
-      const lengthKey = `${newActiveState}Length`;
+      const nextSessionType = this.getNextSessionType();
+      const lengthKey = `${nextSessionType}Length`;
       const newRemainingTime = this.state[lengthKey] * 60;
       
       this.setState(() => ({
-        activeState: newActiveState,
+        activeSessionType: nextSessionType,
         remainingTime: newRemainingTime,
       }));
     }
@@ -102,7 +102,7 @@ class Pomodoro extends React.Component {
           breakLength={this.state.breakLength} 
           sessionLength={this.state.sessionLength}/>
         <Timer 
-          activeState={this.state.activeState} 
+          activeSessionType={this.state.activeSessionType} 
           timerIsActive={this.state.timerIsActive} 
           remainingTime={this.state.remainingTime}
           handleResetClick={this.handleResetClick}

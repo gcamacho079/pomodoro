@@ -19,7 +19,7 @@ const formatTime = (totalSeconds) => {
 const Timer = (props) => {
   return (
     <>
-      <h2 id="timer-label">Session</h2>
+      <h2 id="timer-label">{props.activeSessionType === 'session' ? 'Session' : 'Break'}</h2>
       <span id="time-left">{formatTime(props.remainingTime)}</span>
       <button onClick={props.handleResetClick} id="reset">Reset</button>
       <button onClick={props.handleStartStopClick} id="start_stop">
