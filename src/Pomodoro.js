@@ -1,6 +1,7 @@
 import React from 'react';
 import Timer from './Timer';
 import TimerConfig from './TimerConfig';
+import soundUrl from './beep.wav';
 
 let interval;
 class Pomodoro extends React.Component {
@@ -22,6 +23,7 @@ class Pomodoro extends React.Component {
   }
 
   resetTimer() {
+    this.rewindAudio();
     this.setState(({
       timerIsActive: false,
       remainingTime: this.state.sessionLength * 60,
@@ -39,6 +41,17 @@ class Pomodoro extends React.Component {
     });
   }
 
+  playAudio() {
+    const audioElement = document.querySelector('#beep');
+    audioElement.play();
+  }
+
+  rewindAudio() {
+    const audioElement = document.querySelector('#beep');
+    audioElement.pause();
+    audioElement.currentTime = 0;
+  }
+ 
   getNextSessionType() {
     switch(this.state.activeSessionType) {
       case 'session':
@@ -59,9 +72,11 @@ class Pomodoro extends React.Component {
       const nextSessionType = this.getNextSessionType();
       const lengthKey = `${nextSessionType}Length`;
       const newRemainingTime = this.state[lengthKey] * 60;
+      this.playAudio();
       
-      this.setState(() => ({
+      this.setState(({
         activeSessionType: nextSessionType,
+        autoplayAudio: true,
         remainingTime: newRemainingTime,
       }));
     }
@@ -110,6 +125,7 @@ class Pomodoro extends React.Component {
           remainingTime={this.state.remainingTime}
           handleResetClick={this.handleResetClick}
           handleStartStopClick={this.handleStartStopClick}/>
+        <audio id="beep" src={soundUrl}/>
       </div>
     );
   }
