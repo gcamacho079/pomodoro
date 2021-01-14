@@ -21,7 +21,7 @@ const Timer = (props) => {
     <>
       <h2 id="timer-label">Session</h2>
       <span id="time-left">{formatTime(props.remainingTime)}</span>
-      <button id="reset">Reset</button>
+      <button onClick={props.handleResetClick} id="reset">Reset</button>
       <button onClick={props.handleStartStopClick} id="start_stop">
         {props.timerIsActive ? 'Stop' : 'Start'}
       </button>

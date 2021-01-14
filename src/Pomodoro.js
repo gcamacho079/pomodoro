@@ -16,7 +16,9 @@ class Pomodoro extends React.Component {
     }
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
+    this.handleCountdown = this.handleCountdown.bind(this);
     this.handleStartStopClick = this.handleStartStopClick.bind(this);
+    this.handleResetClick = this.handleResetClick.bind(this);
   }
 
   resetTimer() {
@@ -37,15 +39,39 @@ class Pomodoro extends React.Component {
     });
   }
 
+  getNewActiveState() {
+    switch(this.state.activeState) {
+      case 'session':
+        return 'break';
+      case 'break':
+        return 'session';
+      default:
+        return 'session';
+    }
+  }
+
+  handleCountdown() {
+    if (this.state.remainingTime !== 0) {
+      this.setState(({
+        remainingTime: this.state.remainingTime - 1,
+      }));
+    } else {
+      const newActiveState = this.getNewActiveState();
+      const lengthKey = `${newActiveState}Length`;
+      const newRemainingTime = this.state[lengthKey] * 60;
+      
+      this.setState(() => ({
+        activeState: newActiveState,
+        remainingTime: newRemainingTime,
+      }));
+    }
+  }
+
   activateTimer() {
     this.setState(({
       timerIsActive: true,
     }), () => {
-      interval = setInterval(() => {
-        this.setState(({
-          remainingTime: this.state.remainingTime - 1,
-        }));
-      }, 1000);
+      interval = setInterval(this.handleCountdown, 1000);
     });
   }
 
@@ -63,6 +89,10 @@ class Pomodoro extends React.Component {
     }
   }
 
+  handleResetClick() {
+    this.resetTimer();
+  }
+
   render() {
     return (
       <div className="App">
@@ -75,6 +105,7 @@ class Pomodoro extends React.Component {
           activeState={this.state.activeState} 
           timerIsActive={this.state.timerIsActive} 
           remainingTime={this.state.remainingTime}
+          handleResetClick={this.handleResetClick}
           handleStartStopClick={this.handleStartStopClick}/>
       </div>
     );
