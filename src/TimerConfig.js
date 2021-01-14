@@ -57,7 +57,7 @@ class TimerConfig extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <div>
           <label id="break-label" htmlFor="break-length">Break Length</label>
           <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.props.breakLength} />
@@ -70,7 +70,7 @@ class TimerConfig extends React.Component {
           <button onClick={this.handleClick} data-action="decrement" id="session-decrement">-</button>
           <button onClick={this.handleClick} data-action="increment" id="session-increment">+</button>
         </div>
-      </div>
+      </>
     )
   }
 };

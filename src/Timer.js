@@ -18,12 +18,12 @@ const formatTime = (totalSeconds) => {
 
 const Timer = (props) => {
   return (
-    <div>
+    <>
       <h2 id="timer-label">Session</h2>
       <span id="time-left">{formatTime(props.remainingTime)}</span>
       <button id="reset">Reset</button>
       <button onClick={props.handleStartStopClick} id="start_stop">Start</button>
-    </div>
+    </>
   )
 };
 
