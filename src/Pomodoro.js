@@ -17,10 +17,18 @@ class Pomodoro extends React.Component {
     this.handleStartStopClick = this.handleStartStopClick.bind(this);
   }
 
-  onIntervalChange(property, value) {
-    this.setState((state) => ({
-      [property]: value,
+  resetTimer() {
+    this.setState(({
+      timerIsActive: false,
+      remainingTime: this.state.sessionLength * 60,
+      activeState: 'session',
     }));
+  }
+
+  onIntervalChange(property, value) {
+    this.setState(({
+      [property]: value,
+    }), this.resetTimer);
   }
 
   handleStartStopClick(event) {
