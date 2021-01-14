@@ -90,7 +90,10 @@ class Pomodoro extends React.Component {
   }
 
   handleResetClick() {
-    this.resetTimer();
+    this.setState(({
+      sessionLength: 25,
+      breakLength: 5,
+    }), this.resetTimer);
   }
 
   render() {
