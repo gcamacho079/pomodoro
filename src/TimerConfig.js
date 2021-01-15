@@ -1,8 +1,8 @@
 import React from 'react';
 import getNewValue from './utils/getNewValue';
-import { Button, TimeControls } from './style';
+import { Button, TimeControls, Label, ControlRow,  } from './style';
 
-const labelText = {
+export const labelText = {
   increment: 'Add 1 minute',
   decrement: 'Remove 1 minute',
 }
@@ -63,16 +63,16 @@ class TimerConfig extends React.Component {
 
   render() {
     return (
-      <>
+      <ControlRow>
         <div>
-          <label id="break-label" htmlFor="break-length">Break Length</label>
+          <Label id="break-label" htmlFor="break-length">Break Length</Label>
           <TimeControls>
-            <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.props.breakLength} />
             <Button 
               onClick={this.handleClick} 
               data-action="decrement" 
               id="break-decrement"
               aria-label={labelText.decrement}>-</Button>
+            <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.props.breakLength} />
             <Button 
               onClick={this.handleClick} 
               data-action="increment" 
@@ -81,14 +81,14 @@ class TimerConfig extends React.Component {
           </TimeControls>
         </div>
         <div>
-          <label id="session-label" htmlFor="session-length">Session Length</label>
+          <Label id="session-label" htmlFor="session-length">Session Length</Label>
           <TimeControls>
-            <input onChange={this.handleChange} min="1" max="60" type="number" id="session-length" value={this.props.sessionLength}/>
             <Button 
               onClick={this.handleClick} 
               data-action="decrement" 
               id="session-decrement"
               aria-label={labelText.decrement}>-</Button>
+            <input onChange={this.handleChange} min="1" max="60" type="number" id="session-length" value={this.props.sessionLength}/>
             <Button 
               onClick={this.handleClick} 
               data-action="increment" 
@@ -96,7 +96,7 @@ class TimerConfig extends React.Component {
               aria-label={labelText.increment}>+</Button>
           </TimeControls>
         </div>
-      </>
+      </ControlRow>
     )
   }
 };
