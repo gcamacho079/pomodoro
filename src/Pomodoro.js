@@ -5,7 +5,7 @@ import soundUrl from './beep.wav';
 import styled from 'styled-components';
 import styleSettings from './styleSettings';
 
-const PomodoroWrapper = styled.div`
+const PomodoroWrapper = styled.main`
   font-family: ${styleSettings.fonts.body};
   max-width: 600px;
   background-color: ${styleSettings.colors.primary};

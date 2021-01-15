@@ -1,6 +1,11 @@
 import React from 'react';
 import getNewValue from './utils/getNewValue';
-import styled from 'styled-components';
+import { Button, TimeControls } from './style';
+
+const labelText = {
+  increment: 'Add 1 minute',
+  decrement: 'Remove 1 minute',
+}
 
 const getStateProperty = (id) => {
   let property = '';
@@ -61,15 +66,35 @@ class TimerConfig extends React.Component {
       <>
         <div>
           <label id="break-label" htmlFor="break-length">Break Length</label>
-          <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.props.breakLength} />
-          <button onClick={this.handleClick} data-action="decrement" id="break-decrement">-</button>
-          <button onClick={this.handleClick} data-action="increment" id="break-increment">+</button>
+          <TimeControls>
+            <input onChange={this.handleChange} min="1" max="60" type="number" id="break-length" value={this.props.breakLength} />
+            <Button 
+              onClick={this.handleClick} 
+              data-action="decrement" 
+              id="break-decrement"
+              aria-label={labelText.decrement}>-</Button>
+            <Button 
+              onClick={this.handleClick} 
+              data-action="increment" 
+              id="break-increment"
+              aria-label={labelText.increment}>+</Button>
+          </TimeControls>
         </div>
         <div>
-          <label id="session-label">Session Length</label>
-          <input onChange={this.handleChange} min="1" max="60" type="number" id="session-length" value={this.props.sessionLength}/>
-          <button onClick={this.handleClick} data-action="decrement" id="session-decrement">-</button>
-          <button onClick={this.handleClick} data-action="increment" id="session-increment">+</button>
+          <label id="session-label" htmlFor="session-length">Session Length</label>
+          <TimeControls>
+            <input onChange={this.handleChange} min="1" max="60" type="number" id="session-length" value={this.props.sessionLength}/>
+            <Button 
+              onClick={this.handleClick} 
+              data-action="decrement" 
+              id="session-decrement"
+              aria-label={labelText.decrement}>-</Button>
+            <Button 
+              onClick={this.handleClick} 
+              data-action="increment" 
+              id="session-increment"
+              aria-label={labelText.increment}>+</Button>
+          </TimeControls>
         </div>
       </>
     )
