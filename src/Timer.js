@@ -1,20 +1,4 @@
-import styled from 'styled-components';
-import { Button } from './style';
-
-const TimerLabel = styled.h2`
-  text-align: center;
-`;
-
-const ButtonRow = styled.div`
-  display: grid;
-  grid-column-gap: 30px;
-  grid-template-columns: 1fr 1fr;
-`;
-
-const TimerCountdown = styled.div`
-  font-size: 48px;
-  text-align: center;
-`;
+import { Button, TimerLabel, ButtonRow, TimerCountdown, TimerWrapper } from './style';
 
 const addLeadingZeroes = (value) => {
   let string = value + '';
@@ -36,7 +20,7 @@ const formatTime = (totalSeconds) => {
 
 const Timer = (props) => {
   return (
-    <>
+    <TimerWrapper>
       <TimerLabel id="timer-label">{props.activeSessionType === 'session' ? 'Session' : 'Break'}</TimerLabel>
       <TimerCountdown id="time-left">{formatTime(props.remainingTime)}</TimerCountdown>
       <ButtonRow>
@@ -45,7 +29,7 @@ const Timer = (props) => {
           {props.timerIsActive ? 'Stop' : 'Start'}
         </Button>
       </ButtonRow>
-    </>
+    </TimerWrapper>
   )
 };
 

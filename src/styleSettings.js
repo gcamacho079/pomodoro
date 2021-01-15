@@ -9,6 +9,7 @@ const styleSettings = {
   },
   units: {
     spacer: '30px',
+    spacer_large: '60px',
     spacer_small: '15px',
   }  
 };

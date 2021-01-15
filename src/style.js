@@ -31,3 +31,23 @@ export const ControlRow = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: ${styleSettings.units.spacer};
 `;
+
+export const TimerLabel = styled.h2`
+  text-align: center;
+`;
+
+export const ButtonRow = styled.div`
+  display: grid;
+  grid-column-gap: 30px;
+  grid-template-columns: 1fr 1fr;
+`;
+
+export const TimerCountdown = styled.div`
+  margin: ${styleSettings.units.spacer} 0;
+  font-size: 48px;
+  text-align: center;
+`;
+
+export const TimerWrapper = styled.div`
+  margin: ${styleSettings.units.spacer_large} 0;
+`;
