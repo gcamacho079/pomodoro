@@ -4,12 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## To Do
 This project is still in progress! The following are possible next steps:
-[] Implement relative units
-[] Make timer notifications accessible
-[] Improve styles
-[] Implement Redux (?)
-[] Track number of completed sessions
-[] Update page title at interval (?)
+- [] Implement relative units
+- [] Make timer notifications accessible
+- [] Improve styles
+- [] Implement Redux (?)
+- [] Track number of completed sessions
+- [] Update page title at interval (?)
 ## Available Scripts
 
 In the project directory, you can run:
