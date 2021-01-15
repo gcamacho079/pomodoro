@@ -3,12 +3,22 @@ import Timer from './Timer';
 import TimerConfig from './TimerConfig';
 import soundUrl from './beep.wav';
 import styled from 'styled-components';
+import styleSettings from './styleSettings';
 
 const PomodoroWrapper = styled.div`
+  font-family: ${styleSettings.fonts.body};
   max-width: 600px;
-  background-color: lavender;
+  background-color: ${styleSettings.colors.primary};
+  color: #000000;
   padding: 30px;
   margin: 30px auto;
+  box-shadow: 5px 5px 0;
+`;
+
+const Heading = styled.h1`
+  text-align: center;
+  font-size: 48px;
+  font-family: ${styleSettings.fonts.heading};
 `;
 
 
@@ -123,7 +133,7 @@ class Pomodoro extends React.Component {
   render() {
     return (
       <PomodoroWrapper>
-        <h1>Pomodoro</h1>
+        <Heading>Pomodoro</Heading>
         <TimerConfig 
           onIntervalChange={this.onIntervalChange} 
           breakLength={this.state.breakLength} 
