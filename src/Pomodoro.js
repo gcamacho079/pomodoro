@@ -21,6 +21,10 @@ const Heading = styled.h1`
   font-family: ${styleSettings.fonts.heading};
 `;
 
+const INITIAL_INTERVALS = {
+  sessionLength: 25,
+  breakLength: 5,
+};
 
 let interval;
 class Pomodoro extends React.Component {
@@ -33,7 +37,7 @@ class Pomodoro extends React.Component {
       remainingTime: 1500,
       timerIsActive: false,
       timer: null,
-    }
+    };
 
     this.onIntervalChange = this.onIntervalChange.bind(this);
     this.handleCountdown = this.handleCountdown.bind(this);
@@ -41,23 +45,29 @@ class Pomodoro extends React.Component {
     this.handleResetClick = this.handleResetClick.bind(this);
   }
 
-  resetTimer() {
+  resetTimer(resetToInitial = false) {
     this.rewindAudio();
-    this.setState(({
-      timerIsActive: false,
-      remainingTime: this.state.sessionLength * 60,
-      activeSessionType: 'session',
-    }), () => {
-      clearInterval(interval);
-    });
+    this.setState(
+      {
+        timerIsActive: false,
+        remainingTime: this.state.sessionLength * 60,
+        activeSessionType: 'session',
+      },
+      () => {
+        clearInterval(interval);
+      }
+    );
   }
 
   pauseTimer() {
-    this.setState(({
-      timerIsActive: false,
-    }), () => {
-      clearInterval(interval);
-    });
+    this.setState(
+      {
+        timerIsActive: false,
+      },
+      () => {
+        clearInterval(interval);
+      }
+    );
   }
 
   playAudio() {
@@ -70,9 +80,9 @@ class Pomodoro extends React.Component {
     audioElement.pause();
     audioElement.currentTime = 0;
   }
- 
+
   getNextSessionType() {
-    switch(this.state.activeSessionType) {
+    switch (this.state.activeSessionType) {
       case 'session':
         return 'break';
       case 'break':
@@ -84,38 +94,60 @@ class Pomodoro extends React.Component {
 
   handleCountdown() {
     if (this.state.remainingTime !== 0) {
-      this.setState(({
+      this.setState({
         remainingTime: this.state.remainingTime - 1,
-      }));
+      });
     } else {
       const nextSessionType = this.getNextSessionType();
       const lengthKey = `${nextSessionType}Length`;
       const newRemainingTime = this.state[lengthKey] * 60;
       this.playAudio();
-      
-      this.setState(({
+
+      this.setState({
         activeSessionType: nextSessionType,
         autoplayAudio: true,
         remainingTime: newRemainingTime,
-      }));
+      });
     }
   }
 
   activateTimer() {
-    this.setState(({
-      timerIsActive: true,
-    }), () => {
-      interval = setInterval(this.handleCountdown, 1000);
-    });
+    this.setState(
+      {
+        timerIsActive: true,
+      },
+      () => {
+        interval = setInterval(this.handleCountdown, 1000);
+      }
+    );
   }
 
   onIntervalChange(property, value) {
-    this.setState(({
-      [property]: value,
-    }), this.resetTimer);
+    this.setState(
+      {
+        [property]: value,
+      },
+      this.resetTimer
+    );
+  }
+
+  verifyValidLengths() {
+    if (!this.state.sessionLength) {
+      this.setState({
+        sessionLength: INITIAL_INTERVALS.sessionLength,
+      });
+    }
+
+    if (!this.state.breakLength) {
+      this.setState({
+        breakLength: INITIAL_INTERVALS.breakLength,
+      });
+    }
   }
 
   handleStartStopClick() {
+    this.verifyValidLengths();
+
     if (!this.state.timerIsActive) {
       this.activateTimer();
     } else {
@@ -124,27 +156,26 @@ class Pomodoro extends React.Component {
   }
 
   handleResetClick() {
-    this.setState(({
-      sessionLength: 25,
-      breakLength: 5,
-    }), this.resetTimer);
+    this.setState(INITIAL_INTERVALS, this.resetTimer);
   }
 
   render() {
     return (
       <PomodoroWrapper>
         <Heading>Pomodoro</Heading>
-        <TimerConfig 
-          onIntervalChange={this.onIntervalChange} 
-          breakLength={this.state.breakLength} 
-          sessionLength={this.state.sessionLength}/>
-        <Timer 
-          activeSessionType={this.state.activeSessionType} 
-          timerIsActive={this.state.timerIsActive} 
+        <TimerConfig
+          onIntervalChange={this.onIntervalChange}
+          breakLength={this.state.breakLength}
+          sessionLength={this.state.sessionLength}
+        />
+        <Timer
+          activeSessionType={this.state.activeSessionType}
+          timerIsActive={this.state.timerIsActive}
           remainingTime={this.state.remainingTime}
           handleResetClick={this.handleResetClick}
-          handleStartStopClick={this.handleStartStopClick}/>
-        <audio id="beep" src={soundUrl}/>
+          handleStartStopClick={this.handleStartStopClick}
+        />
+        <audio id="beep" src={soundUrl} />
       </PomodoroWrapper>
     );
   }
