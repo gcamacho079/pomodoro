@@ -33,6 +33,7 @@ class Pomodoro extends React.Component {
     this.state = {
       activeSessionType: 'session',
       breakLength: 5,
+      errorMessage: '',
       sessionLength: 25,
       remainingTime: 1500,
       timerIsActive: false,
@@ -115,6 +116,7 @@ class Pomodoro extends React.Component {
     this.setState(
       {
         timerIsActive: true,
+        errorMessage: '',
       },
       () => {
         interval = setInterval(this.handleCountdown, 1000);
@@ -131,22 +133,21 @@ class Pomodoro extends React.Component {
     );
   }
 
-  verifyValidLengths() {
-    if (!this.state.sessionLength) {
-      this.setState({
-        sessionLength: INITIAL_INTERVALS.sessionLength,
-      });
+  timerLengthsAreValid() {
+    if (!this.state.sessionLength || !this.state.breakLength) {
+      return false;
     }
 
-    if (!this.state.breakLength) {
-      this.setState({
-        breakLength: INITIAL_INTERVALS.breakLength,
-      });
-    }
+    return true;
   }
 
   handleStartStopClick() {
-    this.verifyValidLengths();
+    if (!this.timerLengthsAreValid()) {
+      this.setState({
+        errorMessage: 'Please enter valid session lengths.',
+      });
+      return;
+    }
 
     if (!this.state.timerIsActive) {
       this.activateTimer();
@@ -164,6 +165,7 @@ class Pomodoro extends React.Component {
       <PomodoroWrapper>
         <Heading>Pomodoro</Heading>
         <TimerConfig
+          errorMessage={this.state.errorMessage}
           onIntervalChange={this.onIntervalChange}
           breakLength={this.state.breakLength}
           sessionLength={this.state.sessionLength}

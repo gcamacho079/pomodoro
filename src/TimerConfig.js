@@ -1,6 +1,6 @@
 import React from 'react';
 import getNewValue from './utils/getNewValue';
-import { Button, TimeControls, Label, ControlRow } from './style';
+import { Button, TimeControls, Label, ErrorMessage, ControlRow } from './style';
 
 export const labelText = {
   increment: 'Add 1 minute',
@@ -68,70 +68,73 @@ class TimerConfig extends React.Component {
 
   render() {
     return (
-      <ControlRow>
-        <div>
-          <Label id="break-label" htmlFor="break-length">
-            Break Length
-          </Label>
-          <TimeControls>
-            <Button
-              onClick={this.handleClick}
-              data-action="decrement"
-              id="break-decrement"
-              aria-label={labelText.decrement}
-            >
-              -
-            </Button>
-            <input
-              onChange={this.handleChange}
-              min="1"
-              max="60"
-              type="number"
-              id="break-length"
-              value={this.props.breakLength}
-            />
-            <Button
-              onClick={this.handleClick}
-              data-action="increment"
-              id="break-increment"
-              aria-label={labelText.increment}
-            >
-              +
-            </Button>
-          </TimeControls>
-        </div>
-        <div>
-          <Label id="session-label" htmlFor="session-length">
-            Session Length
-          </Label>
-          <TimeControls>
-            <Button
-              onClick={this.handleClick}
-              data-action="decrement"
-              id="session-decrement"
-              aria-label={labelText.decrement}
-            >
-              -
-            </Button>
-            <input
-              onChange={this.handleChange}
-              min="1"
-              max="60"
-              type="number"
-              id="session-length"
-              value={this.props.sessionLength}
-            />
-            <Button
-              onClick={this.handleClick}
-              data-action="increment"
-              id="session-increment"
-              aria-label={labelText.increment}
-            >
-              +
-            </Button>
-          </TimeControls>
-        </div>
-      </ControlRow>
+      <>
+        <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+        <ControlRow>
+          <div>
+            <Label id="break-label" htmlFor="break-length">
+              Break Length
+            </Label>
+            <TimeControls>
+              <Button
+                onClick={this.handleClick}
+                data-action="decrement"
+                id="break-decrement"
+                aria-label={labelText.decrement}
+              >
+                -
+              </Button>
+              <input
+                onChange={this.handleChange}
+                min="1"
+                max="60"
+                type="number"
+                id="break-length"
+                value={this.props.breakLength}
+              />
+              <Button
+                onClick={this.handleClick}
+                data-action="increment"
+                id="break-increment"
+                aria-label={labelText.increment}
+              >
+                +
+              </Button>
+            </TimeControls>
+          </div>
+          <div>
+            <Label id="session-label" htmlFor="session-length">
+              Session Length
+            </Label>
+            <TimeControls>
+              <Button
+                onClick={this.handleClick}
+                data-action="decrement"
+                id="session-decrement"
+                aria-label={labelText.decrement}
+              >
+                -
+              </Button>
+              <input
+                onChange={this.handleChange}
+                min="1"
+                max="60"
+                type="number"
+                id="session-length"
+                value={this.props.sessionLength}
+              />
+              <Button
+                onClick={this.handleClick}
+                data-action="increment"
+                id="session-increment"
+                aria-label={labelText.increment}
+              >
+                +
+              </Button>
+            </TimeControls>
+          </div>
+        </ControlRow>
+      </>
     );
   }
 }

@@ -26,6 +26,12 @@ export const Label = styled.label`
   margin-bottom: ${styleSettings.units.spacer_small};
 `;
 
+export const ErrorMessage = styled.div`
+  margin: ${styleSettings.units.spacer} 0;
+  font-weight: 700;
+  text-align: center;
+`;
+
 export const ControlRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
