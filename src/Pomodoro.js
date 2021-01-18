@@ -4,6 +4,8 @@ import TimerConfig from './TimerConfig';
 import soundUrl from './beep.wav';
 import styled from 'styled-components';
 import styleSettings from './styleSettings';
+import formatTime from './utils/formatTime';
+import capitalizeFirstLetter from './utils/capitalizeFirstLetter';
 
 const PomodoroWrapper = styled.main`
   font-family: ${styleSettings.fonts.body};
@@ -47,6 +49,7 @@ class Pomodoro extends React.Component {
   }
 
   resetTimer(resetToInitial = false) {
+    document.title = 'Pomodoro';
     this.rewindAudio();
     this.setState(
       {
@@ -95,8 +98,13 @@ class Pomodoro extends React.Component {
 
   handleCountdown() {
     if (this.state.remainingTime !== 0) {
+      const { activeSessionType } = this.state;
+      const newRemainingTime = this.state.remainingTime - 1;
+      document.title = `${capitalizeFirstLetter(
+        activeSessionType
+      )}: ${formatTime(newRemainingTime)}`;
       this.setState({
-        remainingTime: this.state.remainingTime - 1,
+        remainingTime: newRemainingTime,
       });
     } else {
       const nextSessionType = this.getNextSessionType();
