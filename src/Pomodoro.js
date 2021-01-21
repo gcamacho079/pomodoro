@@ -8,19 +8,27 @@ import formatTime from './utils/formatTime';
 import capitalizeFirstLetter from './utils/capitalizeFirstLetter';
 
 const PomodoroWrapper = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: ${styleSettings.fonts.body};
-  max-width: 600px;
+  width: 100%;
+  min-height: 100vh;
   background-color: ${styleSettings.colors.primary};
   color: #000000;
   padding: 30px;
-  margin: 30px auto;
-  box-shadow: 5px 5px 0;
+`;
+
+const PomodoroInner = styled.div`
+  width: 100%;
+  max-width: 600px;
 `;
 
 const Heading = styled.h1`
   text-align: center;
   font-size: 48px;
   font-family: ${styleSettings.fonts.heading};
+  letter-spacing: 3px;
 `;
 
 const INITIAL_INTERVALS = {
@@ -171,21 +179,23 @@ class Pomodoro extends React.Component {
   render() {
     return (
       <PomodoroWrapper>
-        <Heading>Pomodoro</Heading>
-        <TimerConfig
-          errorMessage={this.state.errorMessage}
-          onIntervalChange={this.onIntervalChange}
-          breakLength={this.state.breakLength}
-          sessionLength={this.state.sessionLength}
-        />
-        <Timer
-          activeSessionType={this.state.activeSessionType}
-          timerIsActive={this.state.timerIsActive}
-          remainingTime={this.state.remainingTime}
-          handleResetClick={this.handleResetClick}
-          handleStartStopClick={this.handleStartStopClick}
-        />
-        <audio id="beep" src={soundUrl} />
+        <PomodoroInner>
+          <Heading>Pomodoro</Heading>
+          <TimerConfig
+            errorMessage={this.state.errorMessage}
+            onIntervalChange={this.onIntervalChange}
+            breakLength={this.state.breakLength}
+            sessionLength={this.state.sessionLength}
+          />
+          <Timer
+            activeSessionType={this.state.activeSessionType}
+            timerIsActive={this.state.timerIsActive}
+            remainingTime={this.state.remainingTime}
+            handleResetClick={this.handleResetClick}
+            handleStartStopClick={this.handleStartStopClick}
+          />
+          <audio id="beep" src={soundUrl} />
+        </PomodoroInner>
       </PomodoroWrapper>
     );
   }

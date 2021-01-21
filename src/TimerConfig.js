@@ -1,6 +1,13 @@
 import React from 'react';
 import getNewValue from './utils/getNewValue';
-import { Button, TimeControls, Label, ErrorMessage, ControlRow } from './style';
+import {
+  Button,
+  TimeControls,
+  Label,
+  ErrorMessage,
+  ControlRow,
+  Input,
+} from './style';
 
 export const labelText = {
   increment: 'Add 1 minute',
@@ -84,7 +91,7 @@ class TimerConfig extends React.Component {
               >
                 -
               </Button>
-              <input
+              <Input
                 onChange={this.handleChange}
                 min="1"
                 max="60"
@@ -115,7 +122,7 @@ class TimerConfig extends React.Component {
               >
                 -
               </Button>
-              <input
+              <Input
                 onChange={this.handleChange}
                 min="1"
                 max="60"

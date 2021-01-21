@@ -26,6 +26,15 @@ export const Label = styled.label`
   margin-bottom: ${styleSettings.units.spacer_small};
 `;
 
+export const Input = styled.input`
+  border: none;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-family: inherit;
+  appearance: none;
+`;
+
 export const ErrorMessage = styled.div`
   margin: ${styleSettings.units.spacer} 0;
   font-weight: 700;
