@@ -7,6 +7,13 @@ import styleSettings from './styleSettings';
 import formatTime from './utils/formatTime';
 import capitalizeFirstLetter from './utils/capitalizeFirstLetter';
 
+const INITIAL_INTERVALS = {
+  sessionLength: 25,
+  breakLength: 5,
+};
+
+let interval;
+
 const PomodoroWrapper = styled.main`
   display: flex;
   justify-content: center;
@@ -31,12 +38,6 @@ const Heading = styled.h1`
   letter-spacing: 3px;
 `;
 
-const INITIAL_INTERVALS = {
-  sessionLength: 25,
-  breakLength: 5,
-};
-
-let interval;
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);
@@ -178,7 +179,7 @@ class Pomodoro extends React.Component {
 
   render() {
     return (
-      <PomodoroWrapper>
+      <PomodoroWrapper path="/">
         <PomodoroInner>
           <Heading>Pomodoro</Heading>
           <TimerConfig
