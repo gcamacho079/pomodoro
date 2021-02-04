@@ -20,11 +20,10 @@ const Navigation = (props) => {
             <Link to="/logout">Logout</Link>
           </li>
         )}
-        {!user && (
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        )}
+
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
       </ul>
     </nav>
   );
