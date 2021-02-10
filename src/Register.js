@@ -48,6 +48,9 @@ class Register extends React.Component {
         registrationInfo.email,
         registrationInfo.password
       )
+      .then(() => {
+        this.props.registerUser(registrationInfo.displayName);
+      })
       .catch((error) => {
         if (error.message !== null) {
           this.setState({

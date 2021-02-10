@@ -16,7 +16,7 @@ const Navigation = (props) => {
         )}
         {user && (
           <li>
-            {user && <p>Welcome back, {user}</p>}
+            {user && <p>Welcome back, {user.displayName}</p>}
             <Link to="/logout">Logout</Link>
           </li>
         )}
