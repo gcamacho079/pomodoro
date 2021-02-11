@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '@reach/router';
 
 const Navigation = (props) => {
-  const { user } = props;
+  const { user, logoutUser } = props;
   return (
     <nav>
       <ul>
@@ -17,7 +17,9 @@ const Navigation = (props) => {
         {user && (
           <li>
             {user && <p>Welcome back, {user.displayName}</p>}
-            <Link to="/logout">Logout</Link>
+            <Link onClick={logoutUser} to="/logout">
+              Logout
+            </Link>
           </li>
         )}
 

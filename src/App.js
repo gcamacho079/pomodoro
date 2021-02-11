@@ -1,4 +1,4 @@
-import { Router } from '@reach/router';
+import { Router, navigate } from '@reach/router';
 import React from 'react';
 import firebase from './Firebase';
 import Navigation from './Navigation';
@@ -16,6 +16,7 @@ class App extends React.Component {
     };
 
     this.registerUser = this.registerUser.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +27,22 @@ class App extends React.Component {
     //     user: user,
     //   });
     // });
+  }
+
+  logoutUser(event) {
+    event.preventDefault();
+    this.setState({
+      displayName: null,
+      user: null,
+      userID: null,
+    });
+
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigate('/login');
+      });
   }
 
   registerUser(displayName) {
@@ -41,13 +58,15 @@ class App extends React.Component {
             userID: user.uid,
           });
         });
+
+      navigate('/');
     });
   }
 
   render() {
     return (
       <>
-        <Navigation user={this.state.user} />
+        <Navigation user={this.state.user} logoutUser={this.logoutUser} />
         <Router>
           <Pomodoro path="/" />
           <Login path="/login" />
