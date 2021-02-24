@@ -1,5 +1,5 @@
 import React from 'react';
-import getNewValue from './utils/getNewValue';
+import getNewValue from '../utils/getNewValue';
 import {
   Button,
   TimeControls,
@@ -7,7 +7,7 @@ import {
   ErrorMessage,
   ControlRow,
   Input,
-} from './style';
+} from '../style';
 
 export const labelText = {
   increment: 'Add 1 minute',

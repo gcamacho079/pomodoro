@@ -1,11 +1,11 @@
 import React from 'react';
 import Timer from './Timer';
 import TimerConfig from './TimerConfig';
-import soundUrl from './beep.wav';
+import soundUrl from '../beep.wav';
 import styled from 'styled-components';
-import styleSettings from './styleSettings';
-import formatTime from './utils/formatTime';
-import capitalizeFirstLetter from './utils/capitalizeFirstLetter';
+import styleSettings from '../styleSettings';
+import formatTime from '../utils/formatTime';
+import capitalizeFirstLetter from '../utils/capitalizeFirstLetter';
 
 const INITIAL_INTERVALS = {
   sessionLength: 25,

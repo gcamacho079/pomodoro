@@ -1,10 +1,10 @@
 import { Router, navigate } from '@reach/router';
 import React from 'react';
 import firebase from './Firebase';
-import Navigation from './Navigation';
-import Pomodoro from './Pomodoro';
-import Login from './Login.js';
-import Register from './Register.js';
+import Navigation from './components/Navigation';
+import Pomodoro from './components/Pomodoro';
+import Login from './pages/Login.js';
+import Register from './pages/Register.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,16 +17,6 @@ class App extends React.Component {
 
     this.registerUser = this.registerUser.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
-  }
-
-  componentDidMount() {
-    // const ref = firebase.database().ref('user');
-    // ref.on('value', (snapshot) => {
-    //   let user = snapshot.val();
-    //   this.setState({
-    //     user: user,
-    //   });
-    // });
   }
 
   logoutUser(event) {

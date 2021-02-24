@@ -4,8 +4,8 @@ import {
   ButtonRow,
   TimerCountdown,
   TimerWrapper,
-} from './style';
-import formatTime from './utils/formatTime';
+} from '../style';
+import formatTime from '../utils/formatTime';
 
 const Timer = (props) => {
   return (
