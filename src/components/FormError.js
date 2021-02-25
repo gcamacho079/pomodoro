@@ -1,5 +1,5 @@
-const FormError = () => {
-  return <p>Error</p>;
+const FormError = (props) => {
+  return <p>{props.message}</p>;
 };
 
 export default FormError;
