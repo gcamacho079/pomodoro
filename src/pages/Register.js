@@ -1,5 +1,7 @@
 import React from 'react';
+import FormError from '../components/FormError';
 import firebase from '../Firebase';
+import { Form } from '../style';
 
 class Register extends React.Component {
   constructor(props) {
@@ -66,8 +68,10 @@ class Register extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        {this.state.errorMessage && <p>{this.state.errorMessage}</p>}
+      <Form onSubmit={this.handleSubmit}>
+        {this.state.errorMessage && (
+          <FormError message={this.state.errorMessage} />
+        )}
         <label className="form__label" htmlFor="display-name">
           Display Name
         </label>
@@ -125,7 +129,7 @@ class Register extends React.Component {
         ></input>
 
         <button type="submit">Register</button>
-      </form>
+      </Form>
     );
   }
 }

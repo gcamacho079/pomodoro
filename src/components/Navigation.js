@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import { Nav, NavList } from '../style';
 
 const Navigation = (props) => {
   const { user, logoutUser } = props;
   return (
-    <nav>
-      <ul>
+    <Nav>
+      <NavList>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -16,18 +17,19 @@ const Navigation = (props) => {
         )}
         {user && (
           <li>
-            {user && <p>Welcome back, {user.displayName}</p>}
+            <span>Welcome back, {user.displayName}. </span>
             <Link onClick={logoutUser} to="/logout">
               Logout
             </Link>
           </li>
         )}
-
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-      </ul>
-    </nav>
+        {!user && (
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        )}
+      </NavList>
+    </Nav>
   );
 };
 

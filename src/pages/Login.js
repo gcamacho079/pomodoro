@@ -1,7 +1,8 @@
 import React from 'react';
-import navigate from '@reach/router';
+import { navigate } from '@reach/router';
 import firebase from 'firebase';
 import FormError from '../components/FormError';
+import { Form } from '../style';
 
 class Login extends React.Component {
   constructor(props) {
@@ -32,22 +33,25 @@ class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        console.log(userCredential);
-        this.setState({
-          errorMessage: '',
-        });
+        this.props.logInUser(userCredential.user);
+        navigate('/');
       })
       .catch((error) => {
-        console.log(error.message);
-        this.setState({
-          errorMessage: error.message,
-        });
+        if (error.message !== null) {
+          this.setState({
+            errorMessage: error.message,
+          });
+        } else {
+          this.setState({
+            errorMessage: null,
+          });
+        }
       });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         {this.state.errorMessage && (
           <FormError message={this.state.errorMessage} />
         )}
@@ -80,7 +84,7 @@ class Login extends React.Component {
         ></input>
 
         <button type="submit">Login</button>
-      </form>
+      </Form>
     );
   }
 }

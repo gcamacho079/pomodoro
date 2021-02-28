@@ -2,9 +2,10 @@ import { Router, navigate } from '@reach/router';
 import React from 'react';
 import firebase from './Firebase';
 import Navigation from './components/Navigation';
-import Pomodoro from './components/Pomodoro';
+import Pomodoro from './pages/Pomodoro';
 import Login from './pages/Login.js';
 import Register from './pages/Register.js';
+import { Main } from './style';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends React.Component {
 
     this.registerUser = this.registerUser.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
+    this.logInUser = this.logInUser.bind(this);
   }
 
   logoutUser(event) {
@@ -33,6 +35,14 @@ class App extends React.Component {
       .then(() => {
         navigate('/login');
       });
+  }
+
+  logInUser(user) {
+    this.setState({
+      user: user,
+      displayName: user.displayName,
+      userID: user.uid,
+    });
   }
 
   registerUser(displayName) {
@@ -57,11 +67,13 @@ class App extends React.Component {
     return (
       <>
         <Navigation user={this.state.user} logoutUser={this.logoutUser} />
-        <Router>
-          <Pomodoro path="/" />
-          <Login path="/login" />
-          <Register path="/register" registerUser={this.registerUser} />
-        </Router>
+        <Main>
+          <Router>
+            <Pomodoro path="/" />
+            <Login path="/login" logInUser={this.logInUser} />
+            <Register path="/register" registerUser={this.registerUser} />
+          </Router>
+        </Main>
       </>
     );
   }

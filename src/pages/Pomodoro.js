@@ -1,6 +1,6 @@
 import React from 'react';
-import Timer from './Timer';
-import TimerConfig from './TimerConfig';
+import Timer from '../components/Timer';
+import TimerConfig from '../components/TimerConfig';
 import soundUrl from '../beep.wav';
 import styled from 'styled-components';
 import styleSettings from '../styleSettings';
@@ -14,16 +14,10 @@ const INITIAL_INTERVALS = {
 
 let interval;
 
-const PomodoroWrapper = styled.main`
+const PomodoroWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: ${styleSettings.fonts.body};
-  width: 100%;
-  min-height: 100vh;
-  background-color: ${styleSettings.colors.primary};
-  color: #000000;
-  padding: 30px;
 `;
 
 const PomodoroInner = styled.div`
@@ -179,7 +173,7 @@ class Pomodoro extends React.Component {
 
   render() {
     return (
-      <PomodoroWrapper path="/">
+      <PomodoroWrapper>
         <PomodoroInner>
           <Heading>Pomodoro</Heading>
           <TimerConfig
